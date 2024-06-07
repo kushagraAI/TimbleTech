@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import CustomUser, Movie, Review
-# from timble_tech.admin_site import custom_admin_site
-# Register your models here.
+from .forms import CustomUserCreationForm, CustomUserChangeForm
+from django.contrib.auth.admin import UserAdmin
 
 # @admin.register(CustomUser,Movie,Review, site=custom_admin_site)
 
@@ -12,8 +12,10 @@ admin.site.index_title = "Welcome to Timble Tech"
 # @admin.register(CustomUser,Movie,Review)
 
 
-class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ['email']
+class CustomUserAdmin(UserAdmin):
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+    model = CustomUser
 
 
 class MovieAdmin(admin.ModelAdmin):
